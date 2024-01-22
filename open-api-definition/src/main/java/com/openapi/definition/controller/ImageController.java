@@ -19,6 +19,9 @@ import com.openapi.definition.model.UserDetails;
 import com.openapi.definition.service.UserService;
 
 import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @RestController
 @RequestMapping("/openApi")
@@ -27,6 +30,13 @@ public class ImageController {
 	@Autowired
 	UserService userService;
 	
+	@Operation(
+			tags = "SaveUserDetails",
+			description = "Save User and Image Details in Database...")
+	@ApiResponses(value = { 
+			  @ApiResponse(responseCode = "201", description = "User Created"),
+			  @ApiResponse(responseCode = "400", description = "Invalid User Details"), 
+			  @ApiResponse(responseCode = "404", description = "User not found")})
 	@PostMapping("/saveUserDetails")
 	public ResponseEntity<?> saveUser(@RequestBody UserDetails userDetails) {
 		UserDetails userDetailsSaved = userService.createUser(userDetails);
