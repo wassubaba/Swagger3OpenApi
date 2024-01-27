@@ -51,6 +51,14 @@ public class ImageController {
 		return new ResponseEntity<UserDetails>(HttpStatus.OK);
 	}
 	
+	
+	@Operation(
+			tags = "getAllUsers",
+			description = "Get All the UserDetails along with ImageDetails...")
+	@ApiResponses(value = { 
+			  @ApiResponse(responseCode = "200", description = "Succefully Get All UserDetails and ImageDetsils."),
+			  @ApiResponse(responseCode = "400", description = "Invalid Request."), 
+			  @ApiResponse(responseCode = "404", description = "User not found")})
 	@GetMapping("/getAllUsers")
 	public ResponseEntity<List<UserDetails>> getAllUsers(){
 		List<UserDetails> userDetailsList = userService.getAllUserDetails();
